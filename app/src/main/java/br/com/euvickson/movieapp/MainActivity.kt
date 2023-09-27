@@ -1,8 +1,10 @@
 package br.com.euvickson.movieapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -70,24 +72,30 @@ fun MainContent(movieList: List<String> = listOf(
     "Happiness...",
     "Cross the Line...",
     "Be Happy...",
-    "Pink Panther..."
+    "Pink Panther...",
+    "Interstellar"
 )) {
     Column(modifier = Modifier.padding(12.dp)) {
         LazyColumn() {
             items(items = movieList) {
-                MovieRow(movie = it)
+                MovieRow(movie = it) { movie ->
+                    Log.d("Movie", "MainContent: $movie")
+                }
             }
         }
     }
 }
 
 @Composable
-fun MovieRow(movie: String) {
+fun MovieRow(movie: String, onItemClicked: (String) -> Unit = {}) {
     Card(
         modifier = Modifier
             .padding(4.dp)
             .fillMaxWidth()
-            .height(130.dp),
+            .height(130.dp)
+            .clickable {
+                       onItemClicked(movie)
+            },
         shape = RoundedCornerShape(corner = CornerSize(16.dp)),
         elevation = CardDefaults.cardElevation(6.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White)
