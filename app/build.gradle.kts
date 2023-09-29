@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "br.com.euvickson.movieapp"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "br.com.euvickson.movieapp"
@@ -51,6 +51,8 @@ android {
 
 dependencies {
 
+    val nav_version = "2.7.3"
+
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
     implementation("androidx.activity:activity-compose:1.7.0")
@@ -66,4 +68,7 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+
+    implementation("androidx.navigation:navigation-compose:$nav_version")
 }
