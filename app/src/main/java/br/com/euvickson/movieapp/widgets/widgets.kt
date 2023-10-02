@@ -1,8 +1,5 @@
-package br.com.euvickson.movieapp
+package br.com.euvickson.movieapp.widgets
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -24,34 +21,40 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.euvickson.movieapp.model.Movie
-import br.com.euvickson.movieapp.navigation.MovieNavigation
-import br.com.euvickson.movieapp.ui.theme.MovieAppTheme
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            MyApp {
-                MovieNavigation()
+
+@Composable
+fun MovieRow(movie: Movie, onItemClicked: (String) -> Unit = {}) {
+    Card(
+        modifier = Modifier
+            .padding(4.dp)
+            .fillMaxWidth()
+            .height(130.dp)
+            .clickable {
+                onItemClicked(movie.id)
+            },
+        shape = RoundedCornerShape(corner = CornerSize(16.dp)),
+        elevation = CardDefaults.cardElevation(6.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White)
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Start
+        ){
+            Surface(
+                modifier = Modifier
+                    .padding(12.dp)
+                    .size(100.dp),
+                shape = RectangleShape,
+                shadowElevation = 4.dp,
+                color = Color.White
+            ) {
+                Icon(imageVector = Icons.Default.AccountBox, contentDescription = "Movie Image")
             }
+
+            Text(text = movie.title)
         }
-    }
-}
-
-@Composable
-fun MyApp(content: @Composable () -> Unit) {
-    MovieAppTheme {
-        content()
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaltPreview() {
-    MyApp {
-        MovieNavigation()
     }
 }

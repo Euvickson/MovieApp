@@ -1,6 +1,5 @@
 package br.com.euvickson.movieapp.screens.home
 
-import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -14,8 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import br.com.euvickson.movieapp.MovieRow
+import br.com.euvickson.movieapp.model.Movie
+import br.com.euvickson.movieapp.model.getMovies
 import br.com.euvickson.movieapp.navigation.MovieScreens
+import br.com.euvickson.movieapp.widgets.MovieRow
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -35,17 +36,8 @@ fun HomeScreen(navController: NavController) {
 
 @Composable
 fun MainContent(
-    movieList: List<String> = listOf(
-        "Avatar...",
-        "300...",
-        "Harry Potter...",
-        "Life...",
-        "Happiness...",
-        "Cross the Line...",
-        "Be Happy...",
-        "Pink Panther...",
-        "Interstellar"
-    ), navController: NavController
+    navController: NavController,
+    movieList: List<Movie> = getMovies()
 ) {
     Column(modifier = Modifier.padding(12.dp)) {
         LazyColumn() {
