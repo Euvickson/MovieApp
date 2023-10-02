@@ -25,7 +25,8 @@ fun HomeScreen(navController: NavController) {
             title = { Text(text = "Movies") },
             colors = TopAppBarDefaults
                 .smallTopAppBarColors(
-                    containerColor = Color.Magenta
+                    containerColor = Color.Transparent,
+                    titleContentColor = Color.Black
                 )
         )
         MainContent(navController = navController)
